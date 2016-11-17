@@ -13,9 +13,6 @@ require('./schemas/congressmen'); //giving me access to the schema
 var Congressmen = mongoose.model('Congressmen'); //accessing the model
 
 
-app.set('port', (process.env.PORT || 5000));
-
-
 //static files get loaded through public directory
 app.use(express.static(__dirname + '/public'));
 
@@ -33,11 +30,13 @@ app.get('/', function(request, response) {
 
   response.send('I made a change again!');
 });
+
 app.get('/test', function(request, response) {
-  response.send(__dirname + '/public/test.html');
+  response.sendFile(__dirname + '/public/test.html');
 });
 
 
+app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
